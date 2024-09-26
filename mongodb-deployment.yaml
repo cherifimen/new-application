@@ -6,7 +6,7 @@ metadata:
   labels:
     app: mongo
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: mongo
@@ -15,6 +15,13 @@ spec:
       labels:
         app: mongo
     spec:
+      tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
+      - key: "node.kubernetes.io/disk-pressure"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
       - name: mongo
         image: mongo:latest
