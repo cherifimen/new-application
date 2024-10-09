@@ -13,6 +13,9 @@ spec:
       labels:
         app: frontend
     spec:
+    tolerations:
+        - key: "node-role.kubernetes.io/master"
+          effect: "NoSchedule"  # Permet aux pods de s'exécuter sur le nœud de contrôle
       containers:
         - name: frontend
           image: __IMAGE_NAME__:__IMAGE_TAG__
