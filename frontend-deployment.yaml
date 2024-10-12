@@ -4,7 +4,7 @@ metadata:
   name: frontend-deployment
   namespace: my-application
 spec:
-  replicas: 1
+  replicas: 2  # Augmentez le nombre de réplicas pour une meilleure disponibilité
   selector:
     matchLabels:
       app: frontend
@@ -22,6 +22,13 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
+          resources:  # Spécifiez les ressources pour le conteneur
+            requests:
+              memory: "256Mi"  # Mémoire demandée
+              cpu: "250m"      # CPU demandé
+            limits:
+              memory: "512Mi"  # Limite de mémoire
+              cpu: "500m"      # Limite de CPU
 ---
 apiVersion: v1
 kind: Service
@@ -35,4 +42,5 @@ spec:
   - name: http
     protocol: TCP
     port: 3000
+    targetPort: 3000  # Ajoutez le port cible pour plus de clarté
   type: NodePort
