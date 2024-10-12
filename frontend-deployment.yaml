@@ -4,7 +4,7 @@ metadata:
   name: frontend-deployment
   namespace: my-application
 spec:
-  replicas: 2  # Augmentez le nombre de réplicas pour une meilleure disponibilité
+  replicas: 1  # Augmentez le nombre de réplicas pour une meilleure disponibilité
   selector:
     matchLabels:
       app: frontend
