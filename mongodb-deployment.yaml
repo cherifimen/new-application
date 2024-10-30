@@ -6,7 +6,7 @@ metadata:
   labels:
     app: mongo
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: mongo
@@ -30,6 +30,13 @@ spec:
         volumeMounts:
         - name: mongo-vol
           mountPath: /data/mongo
+         resources:
+           requests:
+             memory: "256Mi"
+             cpu: "250m"
+           limits:
+             memory: "512Mi"
+             cpu: "500m" 
       volumes:
         - name: mongo-vol
           persistentVolumeClaim:
